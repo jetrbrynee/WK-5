@@ -1,12 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class QuadraticCurve: MonoBehaviour
+public class QuadraticCurve : MonoBehaviour
 {
     public Transform startPoint;
     public Transform controlPoint;
     public Transform endPoint;
-    public int numberOfPoints = 50; 
+    public int numberOfPoints = 50;
 
     private LineRenderer lineRenderer;
 
@@ -35,10 +35,12 @@ public class QuadraticCurve: MonoBehaviour
     private Vector3 CalculateQuadraticPoint(float t)
     {
         float u = 1 - t;
-        float tt = t * t;
-        float uu = u * u;
+        float tt = Mathf.Pow(t, 2);
+        float uu = Mathf.Pow(u, 2);
 
-        Vector3 point = (uu * startPoint.position) + (2 * u * t * controlPoint.position) + (tt * endPoint.position);
+        Vector3 point = uu * startPoint.position +
+                        2 * u * t * controlPoint.position +
+                        tt * endPoint.position;
 
         return point;
     }
